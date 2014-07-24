@@ -18,4 +18,14 @@ describe('Renter', function(){
       expect(renter.cash).to.be.within(100, 5000);
     });
   });
+  
+  describe('#Work', function(){
+    it('should add cash', function(){
+      
+      var renter = new Renter('Bob', '34', 'male', 'waiter');
+      // var newCash = renter.work();
+     
+       expect(renter.cash).to.be.within(150, 5250);
+    });
+  });
 });
