@@ -6,7 +6,7 @@
   "bin": {"coveralls" : "./node_modules/coveralls/bin/coveralls.js"},
   "scripts": {
     "test": "mocha test --recursive -R spec",
-    "coveralls": "./node_modules/mocha/bin/mocha test --recursive -r blanket -R mocha-lcov-reporter",
+    "coveralls": "./node_modules/mocha/bin/mocha test --recursive -r blanket -R mocha-lcov-reporter | coveralls"
   },
   "repository": {
     "type": "git",
@@ -20,9 +20,10 @@
   },
   "homepage": "https://github.com/SuperArtie/property-manager",
   "config": {
-        "blanket": {
-         "pattern": "/app/"
-           }
+    "blanket": {
+      "pattern": "/app/"
+    }
+  },
   "dependencies": {
     "chalk": "^0.5.1",
     "lodash": "^2.4.1",
@@ -42,3 +43,4 @@
     "mocha-lcov-reporter": "0.0.1"
   }
 }
+
