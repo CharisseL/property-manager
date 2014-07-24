@@ -1,4 +1,4 @@
-/* global describe, it, before, beforeEach */
+/* global describe, it */
 /* jshint expr:true */
 'use strict';
 var expect = require('chai').expect;
