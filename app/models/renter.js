@@ -24,11 +24,11 @@ Renter.prototype.work = function(){
       break;
     case 'social worker':
       this.cash += (Math.floor(Math.random()*601)+150);
-      break;
   }
 };
 
 Renter.prototype.payRent = function(amount){
+  if(this.isEvicted){return;}
   this.cash = this.cash - amount;
 
   if(this.cash < 0){
@@ -37,5 +37,13 @@ Renter.prototype.payRent = function(amount){
   }
 };
 
+Renter.prototype.party = function(){
+ // if(this.isEvicted){return;}
+  var hype;
+  hype = (Math.floor(Math.random()*11));
+  if(hype >= 8){
+    this.isEvicted = true;
+  }
+};
 
 module.exports = Renter;

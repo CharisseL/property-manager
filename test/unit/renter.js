@@ -6,7 +6,7 @@ var Renter = require('../../app/models/renter');
 
 describe('Renter', function(){
   describe('constructor', function(){
-    it('should create an Item object', function(){
+    it('should create a Renter object', function(){
       
       var renter= new Renter('Bob', '34', 'male', 'waiter');
 
@@ -40,6 +40,25 @@ describe('Renter', function(){
 
       renter.payRent(6000);
       expect(renter.isEvicted).to.equal(true);
+    });
+  });
+  
+  describe('#party', function(){
+    it('should tell how party gets you evicted ', function(){
+      
+      var renter;
+    
+      while(true){
+        renter = new Renter('Bob', '34', 'male', 'waiter');
+        renter.party();
+
+        if(renter.isEvicted){
+          break;
+        }
+      }
+
+      expect(renter.isEvicted).to.be.true;
+
     });
   });
 });
