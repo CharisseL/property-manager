@@ -17,13 +17,22 @@ describe('Room', function(){
     });
   });
   
-  describe('constructor', function(){
-    it('should create a new area object', function(){
+  describe('#area', function(){
+    it('should calculate area of room', function(){
       var room = new Room('living', '45', '56');
       
       var area = room.area();
 
       expect(area).to.equal(2520);
+    });
+  });
+  describe('#cost', function(){
+    it('should calculate the cost of th room', function(){
+      var room = new Room('living', '45', '56');
+      
+      var cost = room.cost();
+
+      expect(cost).to.equal(12600);
     });
   });
 });
