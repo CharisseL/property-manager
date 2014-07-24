@@ -8,6 +8,7 @@ function Renter(name, age, gender, job, cash){
   this.gender = gender;
   this.job = job;
   this.cash = Math.floor(Math.random() * 4901) + 100;
+  this.isEvicted = false;
 }
 
 Renter.prototype.work = function(){
@@ -26,5 +27,15 @@ Renter.prototype.work = function(){
       break;
   }
 };
+
+Renter.prototype.payRent = function(amount){
+  this.cash = this.cash - amount;
+
+  if(this.cash < 0){
+    
+    this.isEvicted = true;
+  }
+};
+
 
 module.exports = Renter;
