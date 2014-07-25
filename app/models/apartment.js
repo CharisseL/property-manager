@@ -1,7 +1,9 @@
 'use strict';
-/* jshint expr:true */
+var connect = require('../lib/mongodb');
 var Room = require('./room');
 var Renter = require('./renter');
+
+global.mongodb.collection('apartments')
 
 function Apartment (unitID, rooms, renters){
   this.unitID = unitID;
@@ -62,6 +64,10 @@ Apartment.prototype.collectRent = function(){
   } 
 };
 
-
+Apartment.prototype.save = function(cb){
+  cItem.save(this, function(err, obj){
+      cb();
+  });
+}
 
 module.exports = Apartment;
