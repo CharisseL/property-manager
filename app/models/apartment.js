@@ -26,4 +26,14 @@ Apartment.prototype.cost = function (){
   return total;
 };
 
+Apartment.prototype.bedrooms = function(){
+  var total = 0;
+  for(var i = 0; i < this.rooms.length; i++){
+    if(this.rooms[i].name === 'bedroom'){
+      total += 1;
+    }
+  }
+  return total;
+};
+
 module.exports = Apartment;
