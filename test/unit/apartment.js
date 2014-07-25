@@ -2,7 +2,7 @@
 /* jshint expr:true */
 'use strict';
 var expect = require('chai').expect;
-//var Renter = require('../../app/models/renter');
+var Renter = require('../../app/models/renter');
 var Room   = require('../../app/models/room');
 var Apartment = require('../../app/models/apartment');
 
@@ -60,9 +60,32 @@ describe('Apartment', function(){
 
       var apt = new Apartment('A1');
       apt.rooms.push(room1, room2, room3, room4);
-      var bedrooms = apt.bedrooms();
+      //var bedrooms = apt.bedrooms();
 
-      expect(bedrooms).to.equal(3);
+      expect(apt.bedrooms()).to.equal(3);
+    });
+  });
+  
+  describe('#isAvailable', function(){
+    it('should see if there are availabilities', function(){
+      
+      var room1 = new Room('bedroom', '45', '56');
+      var room2 = new Room('bedroom', '35', '40');
+      var room3 = new Room('bedroom', '27', '45');
+      var room4 = new Room('bathroom', '15', '20');
+      var room5 = new Room('bedroom', '27', '45');
+
+      var apt = new Apartment('A1');
+      apt.rooms.push(room1, room2, room3, room4, room5);
+
+      var bob = new Renter('Bob', '34', 'male', 'waiter');
+      var sally = new Renter('Sally', '38', 'female', 'coder');
+      var tommy = new Renter('Tommy', '25', 'male', 'social worker');
+
+      apt.renters.push(bob, sally, tommy);
+      
+      expect(apt.bedrooms()).to.equal(4);
+      expect(apt.isAvailable).to.be.true;
     });
   });
 });

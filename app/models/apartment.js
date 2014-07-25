@@ -6,6 +6,8 @@ function Apartment (unitID, rooms, renters){
   this.unitID = unitID;
   this.rooms = [];
   this.renters = [];
+  this.isAvailable = false;
+  console.log(this.isAvailable);
 }
 
 Apartment.prototype.area = function (){
@@ -33,6 +35,7 @@ Apartment.prototype.bedrooms = function(){
       total += 1;
     }
   }
+  this.isAvailable = total > this.renters.length;
   return total;
 };
 
