@@ -88,5 +88,20 @@ describe('Apartment', function(){
       expect(apt.isAvailable).to.be.true;
     });
   });
-});
+  describe('#purgeEvicted', function() {
+    it('should remove evicted tenants from file', function(){
 
+      var jim = new Renter('Jim', '54', 'male', 'social worker');
+      var alice = new Renter('Alice', '71', 'female', 'movie star');
+      var joe = new Renter('Joe', '27', 'male', 'waiter');
+      var apt = new Apartment ('A1');
+
+      apt.renters.push(jim, alice, joe);
+      apt.renters[1].isEvicted = true;
+
+      expect(apt.renters[1].isEvicted).to.be.true;
+      apt.purgeEvicted();
+      expect(apt.renters.length).to.equal(2);
+    });
+  });
+});

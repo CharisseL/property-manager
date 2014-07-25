@@ -1,6 +1,7 @@
 'use strict';
 
 //var Room = require('./room');
+//var Renter = require('./renter');
 
 function Apartment (unitID, rooms, renters){
   this.unitID = unitID;
@@ -37,6 +38,14 @@ Apartment.prototype.bedrooms = function(){
   }
   this.isAvailable = total > this.renters.length;
   return total;
+};
+
+Apartment.prototype.purgeEvicted = function(){
+  for(var i = 0; i < this.renters.length; i++){
+    if(this.renters[i].isEvicted){
+      this.renters.splice(i, 1);
+    }
+  }
 };
 
 module.exports = Apartment;
