@@ -98,10 +98,32 @@ describe('Apartment', function(){
 
       apt.renters.push(jim, alice, joe);
       apt.renters[1].isEvicted = true;
-
+      //console.log(apt.renters);
       expect(apt.renters[1].isEvicted).to.be.true;
+      //console.log(apt.renters[1]);
       apt.purgeEvicted();
+      //console.log(apt.renters);
       expect(apt.renters.length).to.equal(2);
+    });
+  });
+  describe('#collectRent', function() {
+    it('should collect the rent', function(){
+
+      var jim = new Renter('Jim', '54', 'male', 'social worker');
+      var alice = new Renter('Alice', '71', 'female', 'movie star');
+      var joe = new Renter('Joe', '27', 'male', 'waiter');
+      var room1 = new Room('bedroom', '45', '56');
+      var room2 = new Room('bedroom', '35', '40');
+      var room3 = new Room('bedroom', '27', '45');
+      var room4 = new Room('bathroom', '15', '20');
+      var room5 = new Room('bedroom', '27', '45');
+      var apt = new Apartment ('A1');
+      apt.rooms.push(room1, room2, room3, room4, room5);
+      apt.renters.push(jim, alice, joe);
+      apt.collectRent();
+      expect(jim.cash).to.be.below(0);
+      apt.purgeEvicted();
+      expect(apt.renters.length).to.equal(0);
     });
   });
 });

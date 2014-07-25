@@ -1,14 +1,14 @@
 'use strict';
-
-//var Room = require('./room');
-//var Renter = require('./renter');
+/* jshint expr:true */
+var Room = require('./room');
+var Renter = require('./renter');
 
 function Apartment (unitID, rooms, renters){
   this.unitID = unitID;
   this.rooms = [];
   this.renters = [];
   this.isAvailable = false;
-  console.log(this.isAvailable);
+  //console.log(this.isAvailable);
 }
 
 Apartment.prototype.area = function (){
@@ -41,11 +41,27 @@ Apartment.prototype.bedrooms = function(){
 };
 
 Apartment.prototype.purgeEvicted = function(){
-  for(var i = 0; i < this.renters.length; i++){
-    if(this.renters[i].isEvicted){
-      this.renters.splice(i, 1);
+  var notEvicted = [];
+  for(var i = 0; i< this.renters.length; i++){
+   // console.log(i + ' ' + this.renters);
+    if(this.renters[i].isEvicted===false){
+      notEvicted.push(this.renters[i]);
+     // console.log(this.renters.length);
     }
   }
+  this.renters = notEvicted;
 };
+
+Apartment.prototype.collectRent = function(){
+  //console.log('cost ' + this.cost());
+  var rent = this.cost() / this.renters.length; 
+  
+  for(var i = 0; i< this.renters.length; i++){
+    this.renters[i].payRent(rent);
+    //console.log(this.renters[i].cash);
+  } 
+};
+
+
 
 module.exports = Apartment;

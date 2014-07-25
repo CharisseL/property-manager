@@ -1,6 +1,6 @@
 'use strict';
-
-//var Apartment = require('./apartment');
+var Renter = require('./renter');
+var Apartment = require('./apartment');
 
 function Room (name, width, length){
   this.name = name;
