@@ -13,6 +13,7 @@ Room.prototype.area = function(){
 };
 
 Room.prototype.cost = function(){
+  //calling area instance method to use in our cost formula
   return this.area() * 5;
 };
 

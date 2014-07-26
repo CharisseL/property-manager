@@ -1,8 +1,10 @@
 'use strict';
+//importing elements from Room & Apartment
 var Apartment = require('./apartment');
 var Room = require('./room');
 //var request = require ('request');
 
+//defining the Renter constructor
 function Renter(name, age, gender, job, cash){
   this.name = name;
   this.age = age;
@@ -12,9 +14,13 @@ function Renter(name, age, gender, job, cash){
   this.isEvicted = false;
 }
 
+//defining the work instance method()
 Renter.prototype.work = function(){
+  //switch statement because jobs need to match
   switch(this.job){
     case 'movie star':
+      //randomly generating numbers for cash made @ work
+      // math.floor rounds down; therefore +1
       this.cash += (Math.floor(Math.random()*7001)+3000);
       break;
     case 'coder':
@@ -27,26 +33,27 @@ Renter.prototype.work = function(){
       this.cash += (Math.floor(Math.random()*601)+150);
   }
 };
-
+//defining payRent instance method()
 Renter.prototype.payRent = function(amount){
-  //console.log(amount);
-  //console.log('renter:' + JSON.stringify(this));
+  //if renter is evicted, they can't pay the rent
   if(this.isEvicted){return;}
+  //if not evicted, payRent
   this.cash = this.cash - amount;
 
-  //console.log('renter2:' + JSON.stringify(this));
+  //if cash less than 0, get out..evicted!
   if(this.cash < 0){
     
     this.isEvicted = true;
   }
   
-  //console.log('renter3:' + JSON.stringify(this));
 };
 
 Renter.prototype.party = function(){
   if(this.isEvicted){return;}
   var hype;
+  //random scale 1-10, how hype was the party(Loud)?
   hype = (Math.floor(Math.random()*11));
+  //if is was 8 or more, they are evicted
   if(hype >= 8){
     this.isEvicted = true;
   }
