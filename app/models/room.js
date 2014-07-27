@@ -1,6 +1,6 @@
 'use strict';
-var Renter = require('./renter');
-var Apartment = require('./apartment');
+//var Renter = require('./renter');
+//var Apartment = require('./apartment');
 
 function Room (name, width, length){
   this.name = name;
@@ -15,6 +15,10 @@ Room.prototype.area = function(){
 Room.prototype.cost = function(){
   //calling area instance method to use in our cost formula
   return this.area() * 5;
+};
+
+Room.prototype.isBedroom = function(){
+  return this.name === 'Bed';
 };
 
 module.exports = Room;

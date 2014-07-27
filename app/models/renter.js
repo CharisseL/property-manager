@@ -1,8 +1,7 @@
 'use strict';
 //importing elements from Room & Apartment
-var Apartment = require('./apartment');
-var Room = require('./room');
-//var request = require ('request');
+//var Apartment = require('./apartment');
+//var Room = require('./room');
 
 //defining the Renter constructor
 function Renter(name, age, gender, job, cash){
@@ -36,16 +35,18 @@ Renter.prototype.work = function(){
 //defining payRent instance method()
 Renter.prototype.payRent = function(amount){
   //if renter is evicted, they can't pay the rent
-  if(this.isEvicted){return;}
+  if(this.isEvicted){return 0;}
+  amount = parseInt(amount);
+  console.log(amount);
+  //if renter's cash is less than amount
+  //they're evicted
+  this.isEvicted = this.cash < amount;
   //if not evicted, payRent
-  this.cash = this.cash - amount;
-
-  //if cash less than 0, get out..evicted!
-  if(this.cash < 0){
-    
-    this.isEvicted = true;
+  if(!this.isEvicted){
+    this.cash = this.cash - amount;
+    return amount;
   }
-  
+  return 0;
 };
 
 Renter.prototype.party = function(){
